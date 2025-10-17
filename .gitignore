@@ -1,9 +1,17 @@
-node_modules/
-dist/
-build/
+# Node
+node_modules
+npm-debug.log
 .env
-.env.local
-.vscode/
-.DS_Store
+
+# Docker
+*.pid
 *.log
-.terraform/
+.docker
+docker-compose.override.yml
+
+# IDE / Sistema
+.vscode
+.DS_Store
+
+# Build React
+frontend/build
