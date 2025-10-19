@@ -11,7 +11,16 @@
 			"name": "Teste servidor",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				}
 			},
 			"response": []
 		},

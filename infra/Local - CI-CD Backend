@@ -1,0 +1,15 @@
+{
+	"id": "3f4796ee-764d-4cdc-9816-5193c91ee452",
+	"name": "CI-CD Local",
+	"values": [
+		{
+			"key": "base_url",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-10-19T15:02:08.579Z",
+	"_postman_exported_using": "Postman/11.67.5"
+}
