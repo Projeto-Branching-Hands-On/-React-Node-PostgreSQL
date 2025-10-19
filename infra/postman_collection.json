@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "64bcf3e5-3c66-4b16-9a10-b59cc0d52be9",
+		"name": "CI-CD SaaS - Backend",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45851228",
+		"_collection_link": "https://gabrielvitoriogoncalves.postman.co/workspace/Teste~0e85596e-7b82-4367-9179-84350bf197a8/collection/45851228-64bcf3e5-3c66-4b16-9a10-b59cc0d52be9?action=share&source=collection_link&creator=45851228"
+	},
+	"item": [
+		{
+			"name": "Teste servidor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar clientes",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Cadastrar cliente",
+			"request": {
+				"method": "POST",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar cliente",
+			"request": {
+				"method": "PUT",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Remover cliente",
+			"request": {
+				"method": "DELETE",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
