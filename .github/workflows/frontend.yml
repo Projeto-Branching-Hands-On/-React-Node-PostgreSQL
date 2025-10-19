@@ -1,0 +1,52 @@
+name: CI Frontend (HU05)
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+    paths:
+      - 'frontend/**'
+      
+  pull_request:
+    branches: [ "main", "develop" ]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  # SUB-T21: Criar job do frontend no workflow
+  frontend-ci:
+    name: Frontend CI Job
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      - name: 1. Checkout (Baixar o código)
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js v20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: 3. Instalar Dependências (SUB-T22)
+        run: npm ci
+
+      - name: 4. Executar Lint (SUB-T23)
+        run: npm run lint
+
+      - name: 5. Executar Testes de Componentes (SUB-T24)
+        run: npm run test
+        # Essa merda vai falhar até o HU03 ficar pronto.
+
+      - name: 6. Executar Build do Projeto
+        # Necessário para os testes E2E (Cypress)
+        run: npm run build
+
+      - name: 7. Executar Testes E2E com Cypress (SUB-T25)
+        # Este comando 'npm run test:e2e' precisa existir no seu package.json
+        run: npm run test:e2e
+        # Essa merda vai falhar até o HU03 ficar pronto.
