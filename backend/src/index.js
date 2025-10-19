@@ -1,5 +1,5 @@
-const express = require('express');
-const { Pool } = require('pg');
+const express = require("express");
+const { Pool } = require("pg");
 const app = express();
 app.use(express.json());
 
@@ -9,16 +9,16 @@ const pool = new Pool({
 });
 
 pool.connect()
-  .then(() => console.log('✅ Conectado ao banco PostgreSQL'))
-  .catch((err) => console.error('❌ Erro ao conectar ao banco:', err));
+  .then(() => console.log("✅ Conectado ao banco PostgreSQL"))
+  .catch((err) => console.error("❌ Erro ao conectar ao banco:", err));
 
 // Rota básica
-app.get('/', (req, res) => res.send('Backend + DB funcionando 🚀'));
+app.get("/", (req, res) => res.send("Backend + DB funcionando 🚀"));
 
 // Rota para listar clientes (teste inicial)
-app.get('/clientes', async (req, res) => {
+app.get("/clientes", async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM clientes');
+    const result = await pool.query("SELECT * FROM clientes");
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });
