@@ -1,7 +1,9 @@
 version: '3.8'
+
 services:
   db:
     image: postgres:15
+    container_name: postgres_db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -10,24 +12,45 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - app-network
 
   backend:
     build: ../backend
+    container_name: node_backend
     depends_on:
       - db
     environment:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/clientesdb
+      - PORT=3001
     ports:
       - "3001:3001"
     restart: unless-stopped
+    networks:
+      - app-network
 
   frontend:
-    build: ../frontend
+    build:
+      context: ../frontend
+      target: build
+    container_name: react_frontend
+    working_dir: /app
+    volumes:
+      - ../frontend:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev", "--", "--host"]
     depends_on:
       - backend
     ports:
-      - "3000:80"
-    restart: unless-stopped
+      - "3000:5173"
+    environment:
+      - VITE_API_URL=http://backend:3001
+    networks:
+      - app-network
 
 volumes:
   pgdata:
+
+networks:
+  app-network:
+    driver: bridge
