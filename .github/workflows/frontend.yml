@@ -47,6 +47,4 @@ jobs:
         run: npm run build
 
       - name: 7. Executar Testes E2E com Cypress (SUB-T25)
-        # Este comando 'npm run test:e2e' precisa existir no seu package.json
         run: npm run test:e2e
-        # Essa merda vai falhar até o HU03 ficar pronto.
