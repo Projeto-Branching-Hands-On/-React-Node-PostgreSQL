@@ -1,0 +1,47 @@
+name: CI - Frontend React
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  frontend:
+    name: Build, Lint, Test & E2E
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+      # SUB-T21 - Criar job do frontend no workflow
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # SUB-T22 - Instalar dependências React no pipeline
+      - name: Instalar dependências
+        run: npm ci
+
+      # SUB-T23 - Executar lint (ESLint)
+      - name: Executar Lint
+        run: npm run lint
+
+      # SUB-T24 - Executar testes de componentes (React Testing Library)
+      - name: Executar testes unitários e de componentes
+        run: npm test -- --watchAll=false
+
+      # SUB-T25 - Adicionar testes E2E com Cypress
+      - name: Instalar dependências do Cypress
+        run: npm install cypress --save-dev
+
+      - name: Rodar testes E2E com Cypress
+        run: npx cypress run
+
+      - name: Salvar resultados de testes (logs)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorios-testes
+          path: frontend/cypress/videos
