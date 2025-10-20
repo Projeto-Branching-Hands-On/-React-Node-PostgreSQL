@@ -1,0 +1,52 @@
+# SUB-T16: Nome do Workflow
+name: Backend CI (HU04)
+
+# SUB-T17: Define quando o workflow vai rodar (push e PR para a 'main')
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # SUB-T17: Nome do Job do Backend
+  backend-ci:
+    # O tipo de máquina que o job vai rodar
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        # Define o diretório de trabalho padrão para a pasta 'backend'
+        working-directory: ./backend
+
+    steps:
+      # 1. Baixa o código do repositório
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Configura o Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Usando uma versão LTS (Long Term Support)
+          
+      # SUB-T20: Configura o cache de dependências
+      - name: Cache Node.js modules
+        uses: actions/cache@v4
+        with:
+          path: backend/node_modules # O caminho para a pasta de cache
+          key: ${{ runner.os }}-node-${{ hashFiles('backend/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # SUB-T18: Instala as dependências Node.js
+      - name: Install dependencies
+        run: npm ci # 'ci' é mais rápido e seguro para CI do que 'install'
+
+      # SUB-T19: Executa o lint
+      - name: Run ESLint
+        run: npm run lint
+
+      # SUB-T19: Executa os testes unitários
+      - name: Run Jest tests
+        run: npm run test

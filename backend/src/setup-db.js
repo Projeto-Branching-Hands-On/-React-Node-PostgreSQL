@@ -1,4 +1,4 @@
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -14,9 +14,9 @@ async function criarTabela() {
         telefone VARCHAR(20)
       );
     `);
-    console.log('✅ Tabela "clientes" criada (ou já existia)');
+    console.log("✅ Tabela \"clientes\" criada (ou já existia)");
   } catch (err) {
-    console.error('❌ Erro ao criar tabela:', err);
+    console.error("❌ Erro ao criar tabela:", err);
   } finally {
     pool.end();
   }
