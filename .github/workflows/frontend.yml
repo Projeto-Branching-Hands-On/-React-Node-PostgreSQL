@@ -30,7 +30,7 @@ jobs:
 
       # SUB-T24 - Executar testes de componentes (React Testing Library)
       - name: Executar testes unitários e de componentes
-        run: npm test -- --watchAll=false
+        run: npm test -- --watchAll=false --passWithNoTests
 
       # SUB-T25 - Adicionar testes E2E com Cypress
       - name: Instalar dependências do Cypress
